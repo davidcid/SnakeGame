@@ -4,7 +4,6 @@ const height = 400;
 const board = document.querySelector("#board");
 const snake = document.querySelector("#snake");
 let snakeColor = getComputedStyle(snake).backgroundColor;
-let snakeX = getComputedStyle(snake).left;
 let snakeSize = 20;
 let snakePosition = [0,0];
 
@@ -21,42 +20,49 @@ function cambiarColor() {
 function newGame() {
 	board.style.width = `${width}px`;
 	board.style.height = `${height}px`;
+	snake.style.left = `${snakePosition[0] * (width/snakeSize)}`;
 }
 
 function moveRight() {
-	snake.style.left = `${snakePosition[0] * snakeSize}px`;
 	snakePosition[0] += 1;
-	console.log(snakePosition);
 	if (snakePosition[0] * snakeSize >= width) {
 		snakePosition[0] = 0;
 	}
+	snake.style.left = `${snakePosition[0] * snakeSize}px`;
+	
+	console.log(snakePosition);
 }
 
 function moveLeft() {
-	snake.style.left = `${snakePosition[0] * snakeSize}px`;
 	snakePosition[0] -= 1;
-	console.log(snakePosition);
 	if (snakePosition[0] * snakeSize < 0) {
-		snakePosition[0] = width / snakeSize;
+		snakePosition[0] = (width - snakeSize) / snakeSize;
 	}
+	snake.style.left = `${snakePosition[0] * snakeSize}px`;
+	
+	console.log(snakePosition);
 }
 
-function moveDown() {
-	snake.style.top = `${step}px`;
-	step += 20;
-	if (step >= height) {
-		step = 0;
+function moveBottom() {
+	snakePosition[1] += 1;
+	if (snakePosition[1] * snakeSize >= height) {
+		snakePosition[1] = 0;
 	}
+	snake.style.top = `${snakePosition[1] * snakeSize}px`;
+	
+	console.log(snakePosition);
 }
 
 function moveUp() {
-	snake.style.top = `${step}px`;
-	step -= 20;
-	if (step < 0) {
-		step = height + step;
+	snakePosition[1] -= 1;
+	if (snakePosition[1] * snakeSize < 0) {
+		snakePosition[1] = (height - snakeSize) / snakeSize;
 	}
+	snake.style.top = `${snakePosition[1] * snakeSize}px`;
+	
+	console.log(snakePosition);
 }
 
 
 newGame();
-setInterval(moveLeft, 1000);
+//setInterval(moveUp, 1000);
