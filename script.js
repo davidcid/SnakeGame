@@ -29,8 +29,7 @@ function moveRight() {
 	if (snakePosition[0] * snakeSize >= width) {
 		snakePosition[0] = 0;
 	}
-	snake.style.left = `${snakePosition[0] * snakeSize}px`;
-	console.log(snakePosition);
+	moveSnake();
 }
 
 function moveLeft() {
@@ -38,8 +37,7 @@ function moveLeft() {
 	if (snakePosition[0] * snakeSize < 0) {
 		snakePosition[0] = (width - snakeSize) / snakeSize;
 	}
-	snake.style.left = `${snakePosition[0] * snakeSize}px`;
-	console.log(snakePosition);
+	moveSnake();
 }
 
 function moveBottom() {
@@ -47,8 +45,7 @@ function moveBottom() {
 	if (snakePosition[1] * snakeSize >= height) {
 		snakePosition[1] = 0;
 	}
-	snake.style.top = `${snakePosition[1] * snakeSize}px`;
-	console.log(snakePosition);
+	moveSnake();
 }
 
 function moveUp() {
@@ -56,33 +53,35 @@ function moveUp() {
 	if (snakePosition[1] * snakeSize < 0) {
 		snakePosition[1] = (height - snakeSize) / snakeSize;
 	}
+	moveSnake();
+}
+
+function moveSnake() {
+	snake.style.left = `${snakePosition[0] * snakeSize}px`;
 	snake.style.top = `${snakePosition[1] * snakeSize}px`;
 	console.log(snakePosition);
 }
 
 newGame();
-//setInterval(moveUp, 1000);
+//setInterval(moveSnake, 1000);
 
 document.addEventListener('keydown', function(event) {
 	let direction = event.which;
 	console.log(direction);
 	switch (direction) {
+		case 37:
+			moveLeft();
+			break;
+		case 38:
+			moveUp();
+			break;
 		case 39:
 			moveRight();
 			break;
-			case 37:
-				moveLeft();
-				break;
-			case 38:
-				moveUp();
-				break;
-			case 39:
-				moveRight();
-				break;
-			case 40:
-				moveBottom();
-				break;
+		case 40:
+			moveBottom();
+			break;
 		default:
-				moveRight();
+			moveRight();;
 	}
 });
