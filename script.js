@@ -6,6 +6,7 @@ const snake = document.querySelector("#snake");
 const snakeColor = getComputedStyle(snake).backgroundColor;
 const snakeSize = 20;
 const snakePosition = [0,0];
+let direction = 39; // unicode keys: 37=left, 38=top, 39=right, 40=bottom
 
 function cambiarColor() {
 	if (snakeColor === "yellow") {
@@ -29,7 +30,7 @@ function moveRight() {
 	if (snakePosition[0] * snakeSize >= width) {
 		snakePosition[0] = 0;
 	}
-	moveSnake();
+	snake.style.left = `${snakePosition[0] * snakeSize}px`;
 }
 
 function moveLeft() {
@@ -37,7 +38,7 @@ function moveLeft() {
 	if (snakePosition[0] * snakeSize < 0) {
 		snakePosition[0] = (width - snakeSize) / snakeSize;
 	}
-	moveSnake();
+	snake.style.left = `${snakePosition[0] * snakeSize}px`;
 }
 
 function moveBottom() {
@@ -45,7 +46,7 @@ function moveBottom() {
 	if (snakePosition[1] * snakeSize >= height) {
 		snakePosition[1] = 0;
 	}
-	moveSnake();
+	snake.style.top = `${snakePosition[1] * snakeSize}px`;
 }
 
 function moveUp() {
@@ -53,21 +54,10 @@ function moveUp() {
 	if (snakePosition[1] * snakeSize < 0) {
 		snakePosition[1] = (height - snakeSize) / snakeSize;
 	}
-	moveSnake();
+	snake.style.top = `${snakePosition[1] * snakeSize}px`;
 }
 
 function moveSnake() {
-	snake.style.left = `${snakePosition[0] * snakeSize}px`;
-	snake.style.top = `${snakePosition[1] * snakeSize}px`;
-	console.log(snakePosition);
-}
-
-newGame();
-//setInterval(moveSnake, 1000);
-
-document.addEventListener('keydown', function(event) {
-	let direction = event.which;
-	console.log(direction);
 	switch (direction) {
 		case 37:
 			moveLeft();
@@ -84,4 +74,13 @@ document.addEventListener('keydown', function(event) {
 		default:
 			moveRight();;
 	}
+	console.log(snakePosition);
+}
+
+newGame();
+setInterval(moveSnake, 100);
+
+document.addEventListener('keydown', function(event) {
+	direction = event.which;
+	console.log(direction);
 });
