@@ -76,7 +76,7 @@ function moveUp() {
 	tails[0].style.top = `${snakePosition[0][1] * minimumSize}px`;
 }
 
-function checkCollision() {
+function checkEating() {
 	if (snakePosition[0][0] === applePosition[0] &&
 			snakePosition[0][1] === applePosition[1]) {
 		createApple();
@@ -101,9 +101,6 @@ function createTail() {
 
 function moveSnake() {
 	oldPosition = [...snakePosition];
-
-	//console.log(oldPosition);
-
 	switch (direction) {
 		case 37:
 			moveLeft();
@@ -118,27 +115,36 @@ function moveSnake() {
 			moveBottom();
 			break;
 		default:
-			moveRight();;
+			moveRight();
 	}
-
+	//console.log(direction);
+	//console.log("------");
+	//console.log("head:   " + snakePosition[0]);
 	for (let i = 1; i < tails.length; i++) {
+		//console.log("tail " + i + ": " + snakePosition[i]);
+		if (snakePosition[0][0] === snakePosition[i][0] &&
+				snakePosition[0][1] === snakePosition[i][1]) {
+			console.log("colisión!!");
+		}
+
 		snakePosition[i] = [...oldPosition[i - 1]];
-		//console.log(i);
-		//console.log(snakePosition[i] + "-" + oldPosition[i]);
 		tails[i].style.left = `${oldPosition[i][0] * minimumSize}px`;
 		tails[i].style.top = `${oldPosition[i][1] * minimumSize}px`;
 	}
 
 
-	//console.log("New Position: " + snakePosition[0]);
-
-	checkCollision();
+	checkEating();
 }
 
 newGame();
 setInterval(moveSnake, 100);
 
 document.addEventListener('keydown', function(event) {
-	direction = event.which;
+	if (event.which !== 37 && direction === 39 ||
+			event.which !== 38 && direction === 40 ||
+		 	event.which !== 39 && direction === 37 ||
+			event.which !== 40 && direction === 38) {
+		direction = event.which;
+	}
 	//console.log(direction);
 });
