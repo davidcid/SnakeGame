@@ -85,6 +85,8 @@ function checkEating() {
 			snakePosition[0][1] === applePosition[1]) {
 		createApple();
 		createTail();
+		//tails[0].style.left = `${snakeTail[0]}`;
+		//tails[1].style.top = `${snakeTail[1]}`;
 	}
 }
 
@@ -102,12 +104,9 @@ function createTail() {
 	tails = document.querySelectorAll(".tail");
 }
 
-function colision() {
-	clearInterval(runGame);
-}
-
 function moveSnake() {
 	oldPosition = [...snakePosition];
+<<<<<<< HEAD
 	// move the head
 =======
 	let tail = document.createElement("div");
@@ -130,6 +129,8 @@ function moveSnake() {
 
 	//console.log("old position: " + snakePosition[0]);
 >>>>>>> master
+=======
+>>>>>>> parent of f9fb47e... small changes
 	switch (direction) {
 		case 37:
 			moveLeft();
@@ -146,21 +147,27 @@ function moveSnake() {
 		default:
 			moveRight();
 	}
+<<<<<<< HEAD
 
 <<<<<<< HEAD
+=======
+	//console.log(direction);
+	//console.log("------");
+	//console.log("head:   " + snakePosition[0]);
+>>>>>>> parent of f9fb47e... small changes
 	for (let i = 1; i < tails.length; i++) {
-		// check Colision
+		//console.log("tail " + i + ": " + snakePosition[i]);
 		if (snakePosition[0][0] === snakePosition[i][0] &&
 				snakePosition[0][1] === snakePosition[i][1]) {
 			console.log("colisión!!");
-			colision();
 		}
 
-		// move the tails
 		snakePosition[i] = [...oldPosition[i - 1]];
 		tails[i].style.left = `${oldPosition[i][0] * minimumSize}px`;
 		tails[i].style.top = `${oldPosition[i][1] * minimumSize}px`;
 	}
+
+
 	checkEating();
 =======
 	//console.log("new position: " + snakePosition[0]);
@@ -173,14 +180,14 @@ function moveSnake() {
 
 
 newGame();
-const runGame = setInterval(moveSnake, 100);
+setInterval(moveSnake, 100);
 
 document.addEventListener('keydown', function(event) {
-	// Avoid back turns with one button
 	if (event.which !== 37 && direction === 39 ||
 			event.which !== 38 && direction === 40 ||
 		 	event.which !== 39 && direction === 37 ||
 			event.which !== 40 && direction === 38) {
 		direction = event.which;
 	}
+	//console.log(direction);
 });
