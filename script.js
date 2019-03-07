@@ -1,5 +1,5 @@
-const width = 200;
-const height = 200;
+const width = 800;
+const height = 600;
 const minimumSize = 20;
 
 const board = document.querySelector("#board");
