@@ -9,7 +9,11 @@ let tails = document.querySelectorAll(".tail");
 const snakeColor = getComputedStyle(snake).backgroundColor;
 
 let snakePosition = [[0,0]];
+<<<<<<< HEAD
 const applePosition = [0,0];
+=======
+let applePosition = [0,0];
+>>>>>>> master
 let direction = 39; // unicode keys: 37=left, 38=top, 39=right, 40=bottom
 
 function cambiarColor() {
@@ -85,6 +89,7 @@ function checkEating() {
 }
 
 function createTail() {
+<<<<<<< HEAD
 	const tailPosition = snakePosition[snakePosition.length - 1];
 	snakePosition.push([tailPosition[0], tailPosition[1]]);
 	const tail = document.createElement("li");
@@ -104,6 +109,27 @@ function colision() {
 function moveSnake() {
 	oldPosition = [...snakePosition];
 	// move the head
+=======
+	let tail = document.createElement("div");
+	board.appendChild(tail);
+	tail.classList.add("tail");
+	snakePosition.push([snakePosition[snakePosition.length - 1][0], snakePosition[snakePosition.length - 1][1]]);
+	tail.style.left = `${snakePosition[snakePosition.length - 1][0] * snakeSize}px`;
+	tail.style.top = `${snakePosition[snakePosition.length - 1][1] * snakeSize}px`;
+
+	tails = document.querySelectorAll(".tail");
+	console.log(tails);
+	console.log(snakePosition);
+}
+
+function moveSnake() {
+	for (let i = 0; i < tails.length; i++) {
+		tails[i].style.left = `${snakePosition[i][0] * snakeSize}px`;
+		tails[i].style.top = `${snakePosition[i][1] * snakeSize}px`;
+	}
+
+	//console.log("old position: " + snakePosition[0]);
+>>>>>>> master
 	switch (direction) {
 		case 37:
 			moveLeft();
@@ -121,6 +147,7 @@ function moveSnake() {
 			moveRight();
 	}
 
+<<<<<<< HEAD
 	for (let i = 1; i < tails.length; i++) {
 		// check Colision
 		if (snakePosition[0][0] === snakePosition[i][0] &&
@@ -135,7 +162,15 @@ function moveSnake() {
 		tails[i].style.top = `${oldPosition[i][1] * minimumSize}px`;
 	}
 	checkEating();
+=======
+	//console.log("new position: " + snakePosition[0]);
+
+	checkCollision();
+
+>>>>>>> master
 }
+
+
 
 newGame();
 const runGame = setInterval(moveSnake, 100);
