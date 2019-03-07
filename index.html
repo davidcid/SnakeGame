@@ -11,31 +11,26 @@
 
 		#snake {
 			background-color: yellow;
-			width: 20px;
-			height: 20px;
-			position: absolute;
 		}
 
 		#apple {
 			background-color: red;
-			width: 20px;
-			height: 20px;
 			position: absolute;
 		}
 
 		.tail {
 			background-color: orange;
-			width: 20px;
-			height: 20px;
 			position: absolute;
+			list-style: none;
 		}
-
 
 	</style>
 </head>
 <body>
 	<div id="board">
-		<div id="snake"></div>
+		<ul id="snake">
+			<li class="tail"></li>
+		</ul>
 		<div id="apple"></div>
 	</div>
 
