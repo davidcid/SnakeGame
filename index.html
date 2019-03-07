@@ -16,12 +16,23 @@
 		#apple {
 			background-color: red;
 			position: absolute;
+			border: none;
 		}
 
 		.tail {
 			background-color: orange;
 			position: absolute;
 			list-style: none;
+		}
+
+		#game_over {
+			background-color: blue;
+			width: 90%;
+			height: 90%;
+			position: absolute;
+			left: 5%;
+			top: 5%;
+			display: none;
 		}
 
 	</style>
@@ -32,6 +43,11 @@
 			<li class="tail"></li>
 		</ul>
 		<div id="apple"></div>
+		<div id="game_over">
+			<h1>Game Over</h1>
+			<h3>Your Score:</h3>
+			<h2><span id="score"></span></h2>
+		</div>
 	</div>
 
 </body>

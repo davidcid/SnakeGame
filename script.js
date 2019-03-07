@@ -1,5 +1,5 @@
-const width = 200;
-const height = 200;
+const width = 800;
+const height = 600;
 const minimumSize = 20;
 
 const board = document.querySelector("#board");
@@ -63,7 +63,8 @@ function moveLeft() {
 function moveBottom() {
 	snakePosition[0][1] += 1;
 	if (snakePosition[0][1] * minimumSize >= height) {
-		snakePosition[0][1] = 0;
+		//snakePosition[0][1] = 0;
+		colision();
 	}
 	tails[0].style.top = `${snakePosition[0][1] * minimumSize}px`;
 }
@@ -99,6 +100,11 @@ function createTail() {
 
 function colision() {
 	clearInterval(runGame);
+	console.log(tails.length);
+	score = document.querySelector('#score');
+	gameOver = document.querySelector('#game_over');
+	score.innerHTML = tails.length;
+	gameOver.style.display = "block";
 }
 
 function moveSnake() {
