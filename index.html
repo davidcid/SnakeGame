@@ -3,36 +3,55 @@
 <head>
 	<meta charset="utf-8">
 	<title>Snake Game</title>
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet">
 	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
 		#board {
-			background-color: green;
+			background-color: #282C34;
 			position: relative;
 		}
 
 		#snake {
-			background-color: yellow;
+
 		}
 
 		#apple {
-			background-color: red;
+			background-color: #D85D5A;
 			position: absolute;
 			border: none;
 		}
 
 		.tail {
-			background-color: orange;
+			background-color: #9DA5B4;
 			position: absolute;
 			list-style: none;
 		}
 
 		#game_over {
-			background-color: blue;
+			stretch: 100%;
+			flex-wrap: wrap;
+			align-items: center;
+			align-content: center;
+			justify-content: center;
+			font-family: 'Ubuntu Mono', monospace;
+			background-color: #7256B6;
+			opacity: 0.9;
 			width: 90%;
 			height: 90%;
+			color: #C1A05C;
 			position: absolute;
 			left: 5%;
 			top: 5%;
 			display: none;
+			text-align: center;
+		}
+
+		#game_over h1 {
+			color: #3D97B8;
 		}
 
 	</style>

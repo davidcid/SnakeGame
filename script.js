@@ -104,7 +104,7 @@ function colision() {
 	score = document.querySelector('#score');
 	gameOver = document.querySelector('#game_over');
 	score.innerHTML = tails.length;
-	gameOver.style.display = "block";
+	gameOver.style.display = "flex";
 }
 
 function moveSnake() {
