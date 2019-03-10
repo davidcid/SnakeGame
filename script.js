@@ -5,6 +5,8 @@ const minimumSize = 20;
 const board = document.querySelector("#board");
 const snake = document.querySelector("#snake");
 const apple = document.querySelector("#apple");
+const gameOver = document.querySelector('#game_over');
+const newGameButton = document.querySelector("#new-game");
 let tails = document.querySelectorAll(".tail");
 const snakeColor = getComputedStyle(snake).backgroundColor;
 
@@ -37,10 +39,12 @@ function newGame() {
 	tails[0].style.height = `${minimumSize}px`;
 	apple.style.width = `${minimumSize}px`;
 	apple.style.height = `${minimumSize}px`;
-	/*snakePosition[0][0] = (Math.floor((Math.random() * width / minimumSize)));
-	snakePosition[0][1] = (Math.floor((Math.random() * height / minimumSize)));*/
-	tails[0].style.left = `${snakePosition[0][0] * (width / minimumSize)}`;
-	tails[0].style.top = `${snakePosition[0][1] * (height / minimumSize)}`;
+	gameOver.style.display = "none";
+	snakePosition[0][0] = (Math.floor((Math.random() * width / minimumSize)));
+	snakePosition[0][1] = (Math.floor((Math.random() * height / minimumSize)));
+	console.log(snakePosition[0]);
+	tails[0].style.left = `${snakePosition[0][0] * minimumSize}px`;
+	tails[0].style.top = `${snakePosition[0][1] * minimumSize}px`;
 	createApple();
 }
 
@@ -101,8 +105,7 @@ function createTail() {
 function colision() {
 	clearInterval(runGame);
 	console.log(tails.length);
-	score = document.querySelector('#score');
-	gameOver = document.querySelector('#game_over');
+	const score = document.querySelector('#score');
 	score.innerHTML = tails.length;
 	gameOver.style.display = "flex";
 }
