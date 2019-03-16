@@ -1,5 +1,5 @@
-const width = 800;
-const height = 600;
+const width = 400;
+const height = 300;
 const minimumSize = 20;
 
 const board = document.querySelector("#board");
@@ -9,6 +9,7 @@ const gameOver = document.querySelector('#game_over');
 const newGameButton = document.querySelector("#new-game");
 let tails = document.querySelectorAll(".tail");
 const snakeColor = getComputedStyle(snake).backgroundColor;
+let runGame = setInterval(moveSnake, 1000000);
 
 let snakePosition = [[0,0]];
 const applePosition = [0,0];
@@ -33,6 +34,12 @@ function createApple() {
 }
 
 function newGame() {
+	while (snake.firstChild) {
+		snake.removeChild(snake.firstChild);
+	}
+	createTail();
+	snakePosition = [[0,0]];
+	direction = 39;
 	board.style.width = `${width}px`;
 	board.style.height = `${height}px`;
 	tails[0].style.width = `${minimumSize}px`;
@@ -40,12 +47,14 @@ function newGame() {
 	apple.style.width = `${minimumSize}px`;
 	apple.style.height = `${minimumSize}px`;
 	gameOver.style.display = "none";
+	runGame = setInterval(moveSnake, 100);
 	snakePosition[0][0] = (Math.floor((Math.random() * width / minimumSize)));
 	snakePosition[0][1] = (Math.floor((Math.random() * height / minimumSize)));
 	console.log(snakePosition[0]);
 	tails[0].style.left = `${snakePosition[0][0] * minimumSize}px`;
 	tails[0].style.top = `${snakePosition[0][1] * minimumSize}px`;
 	createApple();
+	console.log(runGame);
 }
 
 function moveRight() {
@@ -67,8 +76,7 @@ function moveLeft() {
 function moveBottom() {
 	snakePosition[0][1] += 1;
 	if (snakePosition[0][1] * minimumSize >= height) {
-		//snakePosition[0][1] = 0;
-		colision();
+		snakePosition[0][1] = 0;
 	}
 	tails[0].style.top = `${snakePosition[0][1] * minimumSize}px`;
 }
@@ -104,7 +112,7 @@ function createTail() {
 
 function colision() {
 	clearInterval(runGame);
-	console.log(tails.length);
+	runGame = setInterval(moveSnake, 10000000);
 	const score = document.querySelector('#score');
 	score.innerHTML = tails.length;
 	gameOver.style.display = "flex";
@@ -134,7 +142,6 @@ function moveSnake() {
 		// check Colision
 		if (snakePosition[0][0] === snakePosition[i][0] &&
 				snakePosition[0][1] === snakePosition[i][1]) {
-			console.log("colisión!!");
 			colision();
 		}
 
@@ -146,8 +153,10 @@ function moveSnake() {
 	checkEating();
 }
 
+
+
 newGame();
-const runGame = setInterval(moveSnake, 100);
+
 
 document.addEventListener('keydown', function(event) {
 	// Avoid back turns with one button
