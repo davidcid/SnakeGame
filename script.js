@@ -7,9 +7,12 @@ const snake = document.querySelector("#snake");
 const apple = document.querySelector("#apple");
 const gameOver = document.querySelector('#game_over');
 const newGameButton = document.querySelector("#new-game");
+const scoreDOM = document.querySelector(".score p span");
 let tails = document.querySelectorAll(".tail");
+const panel = document.querySelector("#panel");
 const snakeColor = getComputedStyle(snake).backgroundColor;
 let runGame = setInterval(moveSnake, 1000000);
+let score = 0;
 
 let snakePosition = [[0,0]];
 const applePosition = [0,0];
@@ -40,14 +43,17 @@ function newGame() {
 	createTail();
 	snakePosition = [[0,0]];
 	direction = 39;
+	score = 0;
+	scoreDOM.innerHTML = score;
 	board.style.width = `${width}px`;
 	board.style.height = `${height}px`;
+	panel.style.width = `${width}px`;
 	tails[0].style.width = `${minimumSize}px`;
 	tails[0].style.height = `${minimumSize}px`;
 	apple.style.width = `${minimumSize}px`;
 	apple.style.height = `${minimumSize}px`;
 	gameOver.style.display = "none";
-	runGame = setInterval(moveSnake, 100);
+	runGame = setInterval(moveSnake, 50);
 	snakePosition[0][0] = (Math.floor((Math.random() * width / minimumSize)));
 	snakePosition[0][1] = (Math.floor((Math.random() * height / minimumSize)));
 	console.log(snakePosition[0]);
@@ -92,6 +98,8 @@ function moveUp() {
 function checkEating() {
 	if (snakePosition[0][0] === applePosition[0] &&
 			snakePosition[0][1] === applePosition[1]) {
+		score += 1;
+		scoreDOM.innerHTML = score;
 		createApple();
 		createTail();
 	}
@@ -113,8 +121,8 @@ function createTail() {
 function colision() {
 	clearInterval(runGame);
 	runGame = setInterval(moveSnake, 10000000);
-	const score = document.querySelector('#score');
-	score.innerHTML = tails.length;
+	const finalScore = document.querySelector('#final-score');
+	finalScore.innerHTML = score;
 	gameOver.style.display = "flex";
 }
 
