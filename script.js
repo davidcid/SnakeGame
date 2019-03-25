@@ -1,12 +1,18 @@
-const width = 200;
-const height = 200;
+const width = 400;
+const height = 300;
 const minimumSize = 20;
 
 const board = document.querySelector("#board");
 const snake = document.querySelector("#snake");
 const apple = document.querySelector("#apple");
+const gameOver = document.querySelector('#game_over');
+const newGameButton = document.querySelector("#new-game");
+const scoreDOM = document.querySelector(".score p span");
 let tails = document.querySelectorAll(".tail");
+const panel = document.querySelector("#panel");
 const snakeColor = getComputedStyle(snake).backgroundColor;
+let runGame = setInterval(moveSnake, 1000000);
+let score = 0;
 
 let snakePosition = [[0,0]];
 const applePosition = [0,0];
@@ -31,17 +37,30 @@ function createApple() {
 }
 
 function newGame() {
+	while (snake.firstChild) {
+		snake.removeChild(snake.firstChild);
+	}
+	createTail();
+	snakePosition = [[0,0]];
+	direction = 39;
+	score = 0;
+	scoreDOM.innerHTML = score;
 	board.style.width = `${width}px`;
 	board.style.height = `${height}px`;
+	panel.style.width = `${width}px`;
 	tails[0].style.width = `${minimumSize}px`;
 	tails[0].style.height = `${minimumSize}px`;
 	apple.style.width = `${minimumSize}px`;
 	apple.style.height = `${minimumSize}px`;
-	/*snakePosition[0][0] = (Math.floor((Math.random() * width / minimumSize)));
-	snakePosition[0][1] = (Math.floor((Math.random() * height / minimumSize)));*/
-	tails[0].style.left = `${snakePosition[0][0] * (width / minimumSize)}`;
-	tails[0].style.top = `${snakePosition[0][1] * (height / minimumSize)}`;
+	gameOver.style.display = "none";
+	runGame = setInterval(moveSnake, 50);
+	snakePosition[0][0] = (Math.floor((Math.random() * width / minimumSize)));
+	snakePosition[0][1] = (Math.floor((Math.random() * height / minimumSize)));
+	console.log(snakePosition[0]);
+	tails[0].style.left = `${snakePosition[0][0] * minimumSize}px`;
+	tails[0].style.top = `${snakePosition[0][1] * minimumSize}px`;
 	createApple();
+	console.log(runGame);
 }
 
 function moveRight() {
@@ -79,6 +98,8 @@ function moveUp() {
 function checkEating() {
 	if (snakePosition[0][0] === applePosition[0] &&
 			snakePosition[0][1] === applePosition[1]) {
+		score += 1;
+		scoreDOM.innerHTML = score;
 		createApple();
 		createTail();
 	}
@@ -99,6 +120,10 @@ function createTail() {
 
 function colision() {
 	clearInterval(runGame);
+	runGame = setInterval(moveSnake, 10000000);
+	const finalScore = document.querySelector('#final-score');
+	finalScore.innerHTML = score;
+	gameOver.style.display = "flex";
 }
 
 function moveSnake() {
@@ -125,7 +150,6 @@ function moveSnake() {
 		// check Colision
 		if (snakePosition[0][0] === snakePosition[i][0] &&
 				snakePosition[0][1] === snakePosition[i][1]) {
-			console.log("colisión!!");
 			colision();
 		}
 
@@ -136,9 +160,7 @@ function moveSnake() {
 	}
 	checkEating();
 }
-
 newGame();
-const runGame = setInterval(moveSnake, 100);
 
 document.addEventListener('keydown', function(event) {
 	// Avoid back turns with one button
