@@ -160,11 +160,7 @@ function moveSnake() {
 	}
 	checkEating();
 }
-
-
-
 newGame();
-
 
 document.addEventListener('keydown', function(event) {
 	// Avoid back turns with one button
