@@ -171,3 +171,5 @@ document.addEventListener('keydown', function(event) {
 		direction = event.which;
 	}
 });
+
+/*END SCRIPT*/
