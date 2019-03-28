@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h1>The <span id="s">S</span><span id="nake">nake</span> Game</h1>
+	<p class="instructions">Use the Arrow Keys (↑, →, ↓, ←) to move the snake</p>
 	<div id="panel">
 		<div class="score">
 			<p>Score: <span></span></p>
@@ -15,19 +16,18 @@
 		<div class="hi-score">
 			<p>Hi-Score: <span></span></p>
 		</div>
-		<div class="reset"></div>
 	</div>
 	<div id="board">
-		<ul id="snake">
-			<li class="tail"></li>
-		</ul>
-		<div id="apple"></div>
-		<div id="game_over">
-			<h1>Game Over</h1>
-			<h3>Your Score: </h3>
-			<h2><span id="final-score"></span></h2>
-			<button type="button" name="new-game" id="new-game" onclick="newGame()">New Game</button>
-		</div>
+			<ul id="snake">
+				<li class="tail"></li>
+			</ul>
+			<div id="apple"></div>
+			<div id="game_over">
+				<h1>Game Over</h1>
+				<h3>Your Score: </h3>
+				<h2><span id="final-score"></span></h2>
+				<button type="button" name="new-game" id="new-game" onclick="newGame()">New Game</button>
+			</div>
 	</div>
 
 </body>

@@ -17,9 +17,15 @@ body {
 h1 {
   color: #7256B6;
   margin-top: 40px;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
   font-size: 55px;
   text-align: center;
+}
+
+.instructions {
+  text-align: center;
+  color: #9DA5B4;
+  margin-bottom: 40px;
 }
 
 #panel {
@@ -28,8 +34,12 @@ h1 {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  margin: 0 auto;
+  margin: 5px auto;
+  font-size: 1.2em;
+}
 
+.hi-score {
+  text-align: center;
 }
 
 #s {
