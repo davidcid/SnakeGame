@@ -8,11 +8,13 @@ const apple = document.querySelector("#apple");
 const gameOver = document.querySelector('#game_over');
 const newGameButton = document.querySelector("#new-game");
 const scoreDOM = document.querySelector(".score p span");
+const hiScoreDOM = document.querySelector(".hi-score p span");
 let tails = document.querySelectorAll(".tail");
 const panel = document.querySelector("#panel");
 const snakeColor = getComputedStyle(snake).backgroundColor;
 let runGame = setInterval(moveSnake, 1000000);
 let score = 0;
+let hiScore = 0;
 
 let snakePosition = [[0,0]];
 const applePosition = [0,0];
@@ -45,6 +47,7 @@ function newGame() {
 	direction = 39;
 	score = 0;
 	scoreDOM.innerHTML = score;
+	hiScoreDOM.innerHTML = hiScore;
 	board.style.width = `${width}px`;
 	board.style.height = `${height}px`;
 	panel.style.width = `${width}px`;
@@ -123,6 +126,10 @@ function colision() {
 	runGame = setInterval(moveSnake, 10000000);
 	const finalScore = document.querySelector('#final-score');
 	finalScore.innerHTML = score;
+	if (score > hiScore) {
+		hiScore = score;
+	}
+
 	gameOver.style.display = "flex";
 }
 
@@ -171,3 +178,5 @@ document.addEventListener('keydown', function(event) {
 		direction = event.which;
 	}
 });
+
+/*END SCRIPT*/
