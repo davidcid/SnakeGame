@@ -56,7 +56,7 @@ function newGame() {
 	apple.style.width = `${minimumSize}px`;
 	apple.style.height = `${minimumSize}px`;
 	gameOver.style.display = "none";
-	runGame = setInterval(moveSnake, 50);
+	runGame = setInterval(moveSnake, 150);
 	snakePosition[0][0] = (Math.floor((Math.random() * width / minimumSize)));
 	snakePosition[0][1] = (Math.floor((Math.random() * height / minimumSize)));
 	console.log(snakePosition[0]);
